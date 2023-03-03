@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>1st Year Tech</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="./media/orb.svg">
+</head>
+
+<body>
+  <div id = "page-container">  
+  <div class="center-content fade-in-image">
+    <img id="orb" src="media/orb.svg">
+    <div id = "flex-desktop">
+    <h1 class="page-title">Underclass<br> Recruiting Sucks</h1>
+    <p class="page-paragraph">Here’s something to make it easier.
+      enter your email to get a list of freshman and sophomore tech opportunities every week.</p>
+    <form class="input-form" method="POST"
+      action="https://script.google.com/macros/s/AKfycbwsc3alFRuAFUNuQgb7vQUPTT3zGK3U1tz6eTvQTIrN_v2qpDUzBjPV0RgI-HQzjm9Owg/exec"
+      target="iframe">
+      <input class="text-input" placeholder="Name" type="text" name="Linkedin">
+      <input class="text-input" placeholder="Role (SWE, product, etc)" type="text" name="Phone">
+      <input id="submit-button" value="let's do it" type="submit">
+    </form>
+    </div>
+    <iframe name="iframe" style="position: absolute; visibility: hidden"></iframe>
+  </div>
+</div>
+  <script src="index.js"></script>
+  <script>
+    function submitted() {
+      document.querySelector(".page-paragraph").innerHTML = "Your email was submitted! I'll send you the list ASAP!  If you want more cool stuff or to work on cool stuff, hit me up! <br><br><br><a href = 'https://www.linkedin.com/in/christopher-nakayama-8b1a271a5/' id = 'contact-button'>Connect</a>";
+      document.querySelector(".page-title").innerHTML = "Nice to meet you!";
+      document.querySelector(".input-form").style.visibility = "hidden";
+      document.getElementById("orb").src = "media/me.png";
+    }
+    document.getElementById("submit-button").addEventListener("click", submitted);
+    const form = document.querySelector("#form")
+    const submitButton = document.querySelector("#submit")
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzFGNNkkDOlCJFdm9X11lFOzmQnvgpkm-Nfyh06bk-Z9o0gxxkssTFARcQ8QnOrwdieKA/exec'
+    form.addEventListener('submit', e => {
+      submitButton.disabled = true
+      e.preventDefault()
+      let requestBody = new FormData(form)
+      fetch(scriptURL, { method: 'POST', body: requestBody })
+        .then(response => {
+          alert('Success!', response)
+          submitButton.disabled = false
+        })
+        .catch(error => {
+          alert('Error!', error.message)
+          submitButton.disabled = false
+        }
+        )
+    })
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZSN1YB1WZQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZSN1YB1WZQ');
+  </script>
+</body>
+</html>
